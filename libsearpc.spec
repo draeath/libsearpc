@@ -1,6 +1,6 @@
 Name:           libsearpc
 Version:        3.0
-Release:        5%{?dist}
+Release:        6%{?dist}
 Summary:        A simple and easy-to-use C language RPC framework
 
 License:        LGPLv3
@@ -42,16 +42,16 @@ sed -i -e /\(DESTDIR\)/d %{name}.pc.in
 %build
 ./autogen.sh
 %configure --disable-static --disable-compile-demo
-make %{?_smp_mflags}
+%{__make} %{?_smp_mflags} CFLAGS="%{optflags}"
 
 
 %install
-make install DESTDIR=%{buildroot}
+%{__make} install DESTDIR=%{buildroot}
 find %{buildroot} -name '*.la' -exec rm -f {} ';'
 
 
 %check
-make check
+%{__make} check
 
 
 %post -p /sbin/ldconfig
@@ -74,6 +74,9 @@ make check
 
 
 %changelog
+* Fri Dec 04 2015 Nikos Roussos <comzeradd@fedoraproject.org> - 3.0-6
+- Add optflags
+
 * Fri Sep 11 2015 Nikos Roussos <comzeradd@fedoraproject.org> - 3.0-5
 - Fix license
 
