@@ -1,3 +1,5 @@
+%global _hardened_build 1
+
 Name:           libsearpc
 Version:        3.0.7
 Release:        1%{?dist}
