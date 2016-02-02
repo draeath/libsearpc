@@ -1,11 +1,11 @@
 Name:           libsearpc
-Version:        3.0
-Release:        6%{?dist}
+Version:        3.0.7
+Release:        1%{?dist}
 Summary:        A simple and easy-to-use C language RPC framework
 
 License:        LGPLv3
 URL:            https://github.com/haiwen/%{name}
-Source0:        https://github.com/haiwen/%{name}/archive/v%{version}-latest.tar.gz
+Source0:        https://github.com/haiwen/%{name}/archive/v%{version}.tar.gz
 
 BuildRequires:  autoconf
 BuildRequires:  automake
@@ -35,7 +35,7 @@ applications that use %{name}.
 
 
 %prep
-%setup -qn %{name}-%{version}-latest
+%setup -qn %{name}-%{version}
 sed -i -e /\(DESTDIR\)/d %{name}.pc.in
 
 
@@ -74,6 +74,9 @@ find %{buildroot} -name '*.la' -exec rm -f {} ';'
 
 
 %changelog
+* Tue Feb 02 2016 Nikos Roussos <comzeradd@fedoraproject.org> - 3.0.7-1
+- Update to 3.0.7
+
 * Fri Dec 04 2015 Nikos Roussos <comzeradd@fedoraproject.org> - 3.0-6
 - Add optflags
 
