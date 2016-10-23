@@ -1,13 +1,13 @@
 %global _hardened_build 1
 
 Name:           libsearpc
-Version:        3.0.7
-Release:        2%{?dist}
+Version:        3.1
+Release:        1%{?dist}
 Summary:        A simple and easy-to-use C language RPC framework
 
 License:        LGPLv3
 URL:            https://github.com/haiwen/%{name}
-Source0:        https://github.com/haiwen/%{name}/archive/v%{version}.tar.gz
+Source0:        https://github.com/haiwen/%{name}/archive/v%{version}-latest.tar.gz
 
 BuildRequires:  autoconf
 BuildRequires:  automake
@@ -37,7 +37,7 @@ applications that use %{name}.
 
 
 %prep
-%setup -qn %{name}-%{version}
+%setup -qn %{name}-%{version}-latest
 sed -i -e /\(DESTDIR\)/d %{name}.pc.in
 
 
@@ -76,6 +76,9 @@ find %{buildroot} -name '*.la' -exec rm -f {} ';'
 
 
 %changelog
+* Sun Oct 23 2016 Julien Enselme <jujens@jujens.eu> - 3.1-1
+- Update to 3.1
+
 * Tue Jul 19 2016 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 3.0.7-2
 - https://fedoraproject.org/wiki/Changes/Automatic_Provides_for_Python_RPM_Packages
 
