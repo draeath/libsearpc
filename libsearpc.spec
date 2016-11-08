@@ -2,7 +2,7 @@
 
 Name:           libsearpc
 Version:        3.1
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        A simple and easy-to-use C language RPC framework
 
 License:        LGPLv3
@@ -53,9 +53,11 @@ find %{buildroot} -name '*.la' -exec rm -f {} ';'
 
 
 %check
-if [[ %{_arch} != "ppc64" ]] && [[ %{_arch} != "s390" ]]; then
-    %{__make} check
-fi
+# tests are failing on big endian arches
+# https://bugzilla.redhat.com/show_bug.cgi?id=1388453
+%ifnarch ppc ppc64 s390 s390x
+%{__make} check
+%endif
 
 
 %post -p /sbin/ldconfig
@@ -78,6 +80,9 @@ fi
 
 
 %changelog
+* Tue Nov 08 2016 Dan Horák <dan[at]danny.cz> - 3.1-3
+- Skip the tests in a better way
+
 * Tue Nov 08 2016 Julien Enselme <jujens@jujens.eu> - 3.1-2
 - Skip failing tests on ppc64 and s390
 
