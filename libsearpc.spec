@@ -2,7 +2,7 @@
 
 Name:           libsearpc
 Version:        3.1
-Release:        6%{?dist}
+Release:        7%{?dist}
 Summary:        A simple and easy-to-use C language RPC framework
 
 License:        LGPLv3
@@ -16,6 +16,7 @@ BuildRequires:  glib2-devel
 BuildRequires:  jansson-devel
 BuildRequires:  pygobject2
 BuildRequires:  python-simplejson
+BuildRequires:  python2-devel
 
 
 %description
@@ -70,7 +71,7 @@ find %{buildroot} -name '*.la' -exec rm -f {} ';'
 %license COPYING
 %{_libdir}/%{name}.so.*
 %{_bindir}/searpc-codegen.py
-%{python_sitearch}/pysearpc/
+%{python2_sitearch}/pysearpc/
 
 %files devel
 %license COPYING
@@ -80,6 +81,9 @@ find %{buildroot} -name '*.la' -exec rm -f {} ';'
 
 
 %changelog
+* Mon Aug 14 2017 Iryna Shcherbina <ishcherb@redhat.com> - 3.1-7
+- Add a build-time dependency on python2-devel
+
 * Thu Aug 03 2017 Fedora Release Engineering <releng@fedoraproject.org> - 3.1-6
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_27_Binutils_Mass_Rebuild
 
