@@ -2,7 +2,7 @@
 
 Name:           libsearpc
 Version:        3.1
-Release:        7%{?dist}
+Release:        8%{?dist}
 Summary:        A simple and easy-to-use C language RPC framework
 
 License:        LGPLv3
@@ -15,7 +15,7 @@ BuildRequires:  libtool
 BuildRequires:  glib2-devel
 BuildRequires:  jansson-devel
 BuildRequires:  pygobject2
-BuildRequires:  python-simplejson
+BuildRequires:  python2-simplejson
 BuildRequires:  python2-devel
 
 
@@ -81,6 +81,10 @@ find %{buildroot} -name '*.la' -exec rm -f {} ';'
 
 
 %changelog
+* Tue Jan 09 2018 Iryna Shcherbina <ishcherb@redhat.com> - 3.1-8
+- Update Python 2 dependency declarations to new packaging standards
+  (See https://fedoraproject.org/wiki/FinalizingFedoraSwitchtoPython3)
+
 * Mon Aug 14 2017 Iryna Shcherbina <ishcherb@redhat.com> - 3.1-7
 - Add a build-time dependency on python2-devel
 
