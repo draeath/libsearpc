@@ -2,12 +2,12 @@
 
 Name:           libsearpc
 Version:        3.1
-Release:        12%{?dist}
+Release:        13%{?dist}
 Summary:        A simple and easy-to-use C language RPC framework
 
 License:        LGPLv3
 URL:            https://github.com/haiwen/%{name}
-Source0:        https://github.com/haiwen/%{name}/archive/v%{version}-latest.tar.gz
+Source0:        https://github.com/haiwen/%{name}/archive/%{version}/%{version}-latest-dec-2018.tar.gz
 
 BuildRequires:  autoconf
 BuildRequires:  automake
@@ -40,6 +40,7 @@ applications that use %{name}.
 %prep
 %setup -qn %{name}-%{version}-latest
 sed -i -e /\(DESTDIR\)/d %{name}.pc.in
+sed -i 's@/usr/bin/env python@/usr/bin/env python2@' ./lib/searpc-codegen.py
 
 
 %build
@@ -66,19 +67,22 @@ find %{buildroot} -name '*.la' -exec rm -f {} ';'
 
 %files
 %doc AUTHORS README.markdown
-%license COPYING
+%license LICENSE.txt
 %{_libdir}/%{name}.so.*
 %{_bindir}/searpc-codegen.py
 %{python2_sitearch}/pysearpc/
 
 %files devel
-%license COPYING
+%license LICENSE.txt
 %{_includedir}/searpc*
 %{_libdir}/%{name}.so
 %{_libdir}/pkgconfig/%{name}.pc
 
 
 %changelog
+* Wed Sep 11 2019 Julien Enselme <jujens@jujens.eu> - 3.1-13
+- Update latest tag to latest version.
+
 * Thu Jul 25 2019 Fedora Release Engineering <releng@fedoraproject.org> - 3.1-12
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_31_Mass_Rebuild
 
