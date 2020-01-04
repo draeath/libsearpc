@@ -2,21 +2,20 @@
 
 Name:           libsearpc
 Version:        3.1
-Release:        13%{?dist}
+Release:        14%{?dist}
 Summary:        A simple and easy-to-use C language RPC framework
 
 License:        LGPLv3
 URL:            https://github.com/haiwen/%{name}
-Source0:        https://github.com/haiwen/%{name}/archive/%{version}/%{version}-latest-dec-2018.tar.gz
+Source0:        https://github.com/haiwen/libsearpc/archive/python3/libsearpc-python3.tar.gz
 
 BuildRequires:  autoconf
 BuildRequires:  automake
 BuildRequires:  libtool
 BuildRequires:  glib2-devel
 BuildRequires:  jansson-devel
-BuildRequires:  pygobject2
-BuildRequires:  python2-simplejson
-BuildRequires:  python2-devel
+BuildRequires:  python3-simplejson
+BuildRequires:  python3-devel
 
 
 %description
@@ -38,14 +37,14 @@ applications that use %{name}.
 
 
 %prep
-%setup -qn %{name}-%{version}-latest
+%setup -qn libsearpc-python3
 sed -i -e /\(DESTDIR\)/d %{name}.pc.in
 sed -i 's@/usr/bin/env python@/usr/bin/env python2@' ./lib/searpc-codegen.py
 
 
 %build
 ./autogen.sh
-%configure --disable-static --disable-compile-demo
+%configure --disable-static --disable-compile-demo PYTHON=/usr/bin/python3
 %{__make} %{?_smp_mflags} CFLAGS="%{optflags}"
 
 
@@ -70,7 +69,7 @@ find %{buildroot} -name '*.la' -exec rm -f {} ';'
 %license LICENSE.txt
 %{_libdir}/%{name}.so.*
 %{_bindir}/searpc-codegen.py
-%{python2_sitearch}/pysearpc/
+%{python3_sitearch}/pysearpc/
 
 %files devel
 %license LICENSE.txt
@@ -80,6 +79,9 @@ find %{buildroot} -name '*.la' -exec rm -f {} ';'
 
 
 %changelog
+* Sun Nov 03 2019 Julien Enselme <jujens@jujens.eu> - 3.1-14
+- Make this package compatible with Python3
+
 * Wed Sep 11 2019 Julien Enselme <jujens@jujens.eu> - 3.1-13
 - Update latest tag to latest version.
 
