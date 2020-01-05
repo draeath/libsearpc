@@ -2,7 +2,7 @@
 
 Name:           libsearpc
 Version:        3.1
-Release:        14%{?dist}
+Release:        15%{?dist}
 Summary:        A simple and easy-to-use C language RPC framework
 
 License:        LGPLv3
@@ -39,7 +39,8 @@ applications that use %{name}.
 %prep
 %setup -qn libsearpc-python3
 sed -i -e /\(DESTDIR\)/d %{name}.pc.in
-sed -i 's@/usr/bin/env python@/usr/bin/env python2@' ./lib/searpc-codegen.py
+sed -i 's@/usr/bin/env python@/usr/bin/env python3@' ./lib/searpc-codegen.py ./pysearpc/test_pysearpc.py ./tests/generate.py
+sed -i 's@/usr/bin/python@/usr/bin/python3@' ./pysearpc/pygencode.py
 
 
 %build
@@ -79,6 +80,9 @@ find %{buildroot} -name '*.la' -exec rm -f {} ';'
 
 
 %changelog
+* Sun Jan 05 2019 Julien Enselme <jujens@jujens.eu> - 3.1-15
+- Remove dependency on /usr/bin/python2
+
 * Sun Nov 03 2019 Julien Enselme <jujens@jujens.eu> - 3.1-14
 - Make this package compatible with Python3
 
