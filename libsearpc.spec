@@ -80,7 +80,7 @@ find %{buildroot} -name '*.la' -exec rm -f {} ';'
 
 
 %changelog
-* Sun Jan 05 2019 Julien Enselme <jujens@jujens.eu> - 3.1-15
+* Sun Jan 05 2020 Julien Enselme <jujens@jujens.eu> - 3.1-15
 - Remove dependency on /usr/bin/python2
 
 * Sun Nov 03 2019 Julien Enselme <jujens@jujens.eu> - 3.1-14
