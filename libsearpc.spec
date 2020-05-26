@@ -2,7 +2,7 @@
 
 Name:           libsearpc
 Version:        3.1
-Release:        16%{?dist}
+Release:        17%{?dist}
 Summary:        A simple and easy-to-use C language RPC framework
 
 License:        LGPLv3
@@ -80,6 +80,9 @@ find %{buildroot} -name '*.la' -exec rm -f {} ';'
 
 
 %changelog
+* Tue May 26 2020 Miro Hrončok <mhroncok@redhat.com> - 3.1-17
+- Rebuilt for Python 3.9
+
 * Wed Jan 29 2020 Fedora Release Engineering <releng@fedoraproject.org> - 3.1-16
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_32_Mass_Rebuild
 
