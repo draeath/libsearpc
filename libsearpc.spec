@@ -12,9 +12,9 @@ Source0:        https://github.com/haiwen/libsearpc/archive/python3/libsearpc-py
 BuildRequires:  autoconf
 BuildRequires:  automake
 BuildRequires:  libtool
-BuildRequires:  glib2-devel
-BuildRequires:  jansson-devel
-BuildRequires:  python3-simplejson
+BuildRequires:  make
+BuildRequires:  pkgconfig(gobject-2.0)
+BuildRequires:  pkgconfig(jansson)
 BuildRequires:  python3-devel
 
 
@@ -27,8 +27,6 @@ left to users.
 %package        devel
 Summary:        Development files for %{name}
 Requires:       %{name}%{?_isa} = %{version}-%{release}
-Requires:       glib2-devel
-Requires:       jansson-devel >= 2.2.1
 
 
 %description    devel
@@ -46,11 +44,11 @@ sed -i 's@/usr/bin/python@/usr/bin/python3@' ./pysearpc/pygencode.py
 %build
 ./autogen.sh
 %configure --disable-static --disable-compile-demo PYTHON=/usr/bin/python3
-%{__make} %{?_smp_mflags} CFLAGS="%{optflags}"
+%make_build
 
 
 %install
-%{__make} install DESTDIR=%{buildroot}
+%make_install
 find %{buildroot} -name '*.la' -exec rm -f {} ';'
 
 
@@ -58,7 +56,7 @@ find %{buildroot} -name '*.la' -exec rm -f {} ';'
 # tests are failing on big endian arches
 # https://bugzilla.redhat.com/show_bug.cgi?id=1388453
 %ifnarch ppc ppc64 s390 s390x
-%{__make} check
+%make_build check
 %endif
 
 
@@ -68,7 +66,7 @@ find %{buildroot} -name '*.la' -exec rm -f {} ';'
 %files
 %doc AUTHORS README.markdown
 %license LICENSE.txt
-%{_libdir}/%{name}.so.*
+%{_libdir}/%{name}.so.1*
 %{_bindir}/searpc-codegen.py
 %{python3_sitearch}/pysearpc/
 
