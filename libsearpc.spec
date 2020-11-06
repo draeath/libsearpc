@@ -1,13 +1,13 @@
 %global _hardened_build 1
 
 Name:           libsearpc
-Version:        3.1
-Release:        18%{?dist}
+Version:        3.2
+Release:        1%{?dist}
 Summary:        A simple and easy-to-use C language RPC framework
 
 License:        LGPLv3
 URL:            https://github.com/haiwen/%{name}
-Source0:        https://github.com/haiwen/libsearpc/archive/python3/libsearpc-python3.tar.gz
+Source0:        %{url}/archive/v%{version}-latest/%{name}-%{version}-latest.tar.gz
 
 BuildRequires:  autoconf
 BuildRequires:  automake
@@ -35,7 +35,7 @@ applications that use %{name}.
 
 
 %prep
-%setup -qn libsearpc-python3
+%setup -qn %{name}-%{version}-latest
 sed -i -e /\(DESTDIR\)/d %{name}.pc.in
 sed -i 's@/usr/bin/env python@/usr/bin/env python3@' ./lib/searpc-codegen.py ./pysearpc/test_pysearpc.py ./tests/generate.py
 sed -i 's@/usr/bin/python@/usr/bin/python3@' ./pysearpc/pygencode.py
@@ -43,7 +43,7 @@ sed -i 's@/usr/bin/python@/usr/bin/python3@' ./pysearpc/pygencode.py
 
 %build
 ./autogen.sh
-%configure --disable-static --disable-compile-demo PYTHON=/usr/bin/python3
+%configure --disable-static --disable-compile-demo --with-python3
 %make_build
 
 
@@ -78,6 +78,9 @@ find %{buildroot} -name '*.la' -exec rm -f {} ';'
 
 
 %changelog
+* Wed Nov 04 2020 Aleksei Bavshin <alebastr@fedoraproject.org> - 3.2-1
+- Update to 3.2
+
 * Tue Jul 28 2020 Fedora Release Engineering <releng@fedoraproject.org> - 3.1-18
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_33_Mass_Rebuild
 
