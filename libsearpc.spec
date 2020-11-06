@@ -1,4 +1,9 @@
 %global _hardened_build 1
+# checkout by commit for a valid persistent source link
+# the corresponding git tag is v3.2-latest
+%global commit      50ff08b03c7cec8e10b35ba438633b9fe08a8d90
+%global date        20200617
+%global shortcommit %(c=%{commit}; echo ${c:0:7})
 
 Name:           libsearpc
 Version:        3.2
@@ -7,7 +12,7 @@ Summary:        A simple and easy-to-use C language RPC framework
 
 License:        LGPLv3
 URL:            https://github.com/haiwen/%{name}
-Source0:        %{url}/archive/v%{version}-latest/%{name}-%{version}-latest.tar.gz
+Source0:        %{url}/archive/%{commit}/%{name}-%{version}%{?date:-%{date}git%{shortcommit}}.tar.gz
 
 BuildRequires:  autoconf
 BuildRequires:  automake
@@ -35,7 +40,7 @@ applications that use %{name}.
 
 
 %prep
-%setup -qn %{name}-%{version}-latest
+%setup -qn %{name}-%{commit}
 sed -i -e /\(DESTDIR\)/d %{name}.pc.in
 sed -i 's@/usr/bin/env python@/usr/bin/env python3@' ./lib/searpc-codegen.py ./pysearpc/test_pysearpc.py ./tests/generate.py
 sed -i 's@/usr/bin/python@/usr/bin/python3@' ./pysearpc/pygencode.py
