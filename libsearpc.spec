@@ -2,11 +2,11 @@
 # checkout by commit for a valid persistent source link
 # the corresponding git tag is v3.2-latest
 %global commit      50ff08b03c7cec8e10b35ba438633b9fe08a8d90
-%global date        20200617
+%global date        20200618
 %global shortcommit %(c=%{commit}; echo ${c:0:7})
 
 Name:           libsearpc
-Version:        3.2
+Version:        3.2.0
 Release:        1%{?dist}
 Summary:        A simple and easy-to-use C language RPC framework
 
@@ -83,6 +83,9 @@ find %{buildroot} -name '*.la' -exec rm -f {} ';'
 
 
 %changelog
+* Fri Dec 25 2020 Aleksei Bavshin <alebastr@fedoraproject.org> - 3.2.0-1
+- Change version to 3.2.0 (no source changes)
+
 * Wed Nov 04 2020 Aleksei Bavshin <alebastr@fedoraproject.org> - 3.2-1
 - Update to 3.2
 
