@@ -1,13 +1,13 @@
 %global _hardened_build 1
 # checkout by commit for a valid persistent source link
 # the corresponding git tag is v3.2-latest
-%global commit      50ff08b03c7cec8e10b35ba438633b9fe08a8d90
-%global date        20200618
+%global commit      54145b03f4240222e336a9a2f402e93facefde65
+%global date        20220425
 %global shortcommit %(c=%{commit}; echo ${c:0:7})
 
 Name:           libsearpc
 Version:        3.2.0
-Release:        6%{?dist}
+Release:        7%{?dist}
 Summary:        A simple and easy-to-use C language RPC framework
 
 License:        LGPLv3
@@ -83,6 +83,9 @@ find %{buildroot} -name '*.la' -exec rm -f {} ';'
 
 
 %changelog
+* Wed Jun 22 2022 Aleksei Bavshin <alebastr@fedoraproject.org> - 3.2.0-7
+- Sync with v3.2-latest to pick C++ compatibility fix
+
 * Mon Jun 13 2022 Python Maint <python-maint@redhat.com> - 3.2.0-6
 - Rebuilt for Python 3.11
 
